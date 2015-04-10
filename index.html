@@ -4,19 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Formlue SAE de Shebrooke</title>
-    <link href="/Content/bootstrap.css" rel="stylesheet">
-	<link href="/Content/site.css" rel="stylesheet">
+    <link href="Content/bootstrap.css" rel="stylesheet">
+	<link href="Content/site.css" rel="stylesheet">
 
-    <script src="/Scripts/modernizr-2.6.2.js"></script><style type="text/css"></style>
+    <script src="Scripts/modernizr-2.6.2.js"></script><style type="text/css"></style>
 
-    <script src="/Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/jquery-1.10.2.js"></script>
 
-    <script src="/Scripts/Chart.js"></script>
-    <script src="/Scripts/jQueryRotate.js"></script>
+    <script src="Scripts/Chart.js"></script>
+    <script src="Scripts/jQueryRotate.js"></script>
     <style>
-        @@font-face {
+        @font-face {
             font-family: 'DigitalFont';
-            src: url("@Url.Content("~/fonts/DS-DIGI.TTF")");
+            src: url("fonts/DS-DIGI.TTF");
         }
 
         .digital {font-family: "DigitalFont";font-size: 52px;}
@@ -63,7 +63,7 @@
 
 <body>
     <div class="container body-content content">
-    <h1>"Formlue SAE de Shebrooke"</h1>
+    <h1>Formlue SAE de Shebrooke</h1>
 
 		<div class="row">
 			<div class="col-md-4">
@@ -365,12 +365,9 @@
 
 			var isConnected = false;
 			function OutputLog(msg) {
-				@if (Model)
 			{
-				<text>
 				var content = '<p>' + msg + '</p>';
 				$('#consolebox').append(content);
-				</text>
 			}
 			};
 
@@ -437,7 +434,7 @@
         </footer>
     </div>
 
-    <script src="/Scripts/bootstrap.js"></script>
-	<script src="/Scripts/respond.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+	<script src="Scripts/respond.js"></script>
 </body>
 </html>
