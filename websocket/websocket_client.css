@@ -1,0 +1,13 @@
+#consolebox {  
+    text-align:left;  
+    margin:0 auto;
+    background:#fff;  
+    height:150px;  
+    width:100%;  
+    border:1px solid #ACD8F0;
+    overflow:auto;
+}
+
+#consolebox p{
+	margin:0;
+}
