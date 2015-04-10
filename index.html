@@ -1,1 +1,443 @@
-Hello World!
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formlue SAE de Shebrooke</title>
+    <link href="/Content/bootstrap.css" rel="stylesheet">
+	<link href="/Content/site.css" rel="stylesheet">
+
+    <script src="/Scripts/modernizr-2.6.2.js"></script><style type="text/css"></style>
+
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+
+    <script src="/Scripts/Chart.js"></script>
+    <script src="/Scripts/jQueryRotate.js"></script>
+    <style>
+        @@font-face {
+            font-family: 'DigitalFont';
+            src: url("@Url.Content("~/fonts/DS-DIGI.TTF")");
+        }
+
+        .digital {font-family: "DigitalFont";font-size: 52px;}
+
+        .table th {font-size: 24px;}
+        
+        .bs-sidebar .nav > .active > ul {
+            display: block;
+        }
+
+        .navbar {
+            float: left;
+            width: 10%;
+            height: 100%;
+            min-height:100%;
+        }
+
+        .content {
+            float: right;
+            width: 90%;
+            height: 100%;
+            min-height:100%;
+        }
+
+        .navbar-font {
+            color:white;
+            text-align:center;
+        }
+
+    </style>
+</head>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <h2 class="list-group-item-heading navbar-font">Sections</h2>
+    <div class="list-group">
+        <a href="#bms1" class="list-group-item">BMS 1</a>
+        <a href="#bms2" class="list-group-item">BMS 2</a>
+        <a href="#bms3" class="list-group-item">BMS 3</a>
+        <a href="#bms4" class="list-group-item">BMS 4</a>
+        <a href="#brake-accel-turn" class="list-group-item">Pedal, Brake and Wheel</a>
+        <a href="#roue-tempmoteur" class="list-group-item">Roues, Moteur et Drive</a>
+    </div>
+</div>
+
+<body>
+    <div class="container body-content content">
+    <h1>"Formlue SAE de Shebrooke"</h1>
+
+		<div class="row">
+			<div class="col-md-4">
+				Host: <input type="text" value="ws://localhost:81" id="hostform"/>
+			</div>
+			<div class="col-md-4">
+				<button class="btn btn-primary" onclick="connect()">Connect to Host</button>
+			</div>
+		</div>
+		<div class="row" id="bms1">
+			<div class="col-md-6">
+				<h2>BMS 1 voltage</h2>
+			</div>
+			<div class="col-md-6">
+				<h2>BMS 1 Temperature</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<canvas id="BMS1Volt" width="400" height="400"></canvas>
+			</div>
+			<div class="col-md-6">
+				<table class="table table-striped" id="BMSTable1">
+					<tr>
+						<th style="vertical-align:middle;">Resistance board</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 1</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 2</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 3</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 4</th>
+						<td class="digital">0</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="row" id="bms2" style="padding-top:50px;">
+			<div class=" col-md-6">
+			<h2>BMS 2 voltage</h2>
+		</div>
+			<div class="col-md-6">
+				<h2>BMS 2 Temperature</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<canvas id="BMS2Volt" width="400" height="400"></canvas>
+			</div>
+			<div class="col-md-6">
+				<table class="table table-striped" id="BMSTable2">
+					<tr>
+						<th style="vertical-align:middle;">Resistance board</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 1</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 2</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 3</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 4</th>
+						<td class="digital">0</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="row" id="bms3" style="padding-top:50px;">
+			<div class=" col-md-6">
+				<h2>BMS 3 voltage</h2>
+			</div>
+			<div class="col-md-6">
+				<h2>BMS 3 Temperature</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<canvas id="BMS3Volt" width="400" height="400"></canvas>
+			</div>
+			<div class="col-md-6">
+				<table class="table table-striped" id="BMSTable3">
+					<tr>
+						<th style="vertical-align:middle;">Resistance board</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 1</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 2</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 3</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 4</th>
+						<td class="digital">0</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="row" id="bms4" style="padding-top:50px;">
+			<div class=" col-md-6">
+				<h2>BMS 4 voltage</h2>
+			</div>
+			<div class="col-md-6">
+				<h2>BMS 4 Temperature</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<canvas id="BMS4Volt" width="400" height="400"></canvas>
+			</div>
+			<div class="col-md-6">
+				<table class="table table-striped" id="BMSTable4">
+					<tr>
+						<th style="vertical-align:middle;">Resistance board</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 1</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 2</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 3</th>
+						<td class="digital">0</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Cell 4</th>
+						<td class="digital">0</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="row" id="brake-accel-turn" style="padding-top:50px;">
+			<div class=" col-md-4">
+				<h2>Brake pressure %</h2>
+			</div>
+			<div class="col-md-4">
+				<h2>Acceleration pedal %</h2>
+			</div>
+			<div class="col-md-4">
+				<h2>Steering Wheel rotation</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class=" col-md-4">
+				<canvas id="brake" width="200" height="200"></canvas>
+			</div>
+			<div class=" col-md-4">
+				<canvas id="accel" width="200" height="200"></canvas>
+			</div>
+			<div class=" col-md-4">
+				<img id="wheel" src="http://www.lyletannerferrariparts.com/images/steeringwheels/246steeringwheel_early.png">
+			</div>
+		</div>
+
+		<div class="row" id="roue-tempmoteur" style="padding-top:50px;">
+			<div class=" col-md-6">
+				<h2>Vitesse de rotation des roues</h2>
+			</div>
+			<div class="col-md-6">
+				<h2>Température moteur et drive</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class=" col-md-6">
+				<table class="table table-striped">
+					<tr>
+						<th style="vertical-align:middle;">Roue 1</th>
+						<td class="digital">0 rpm</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Roue 2</th>
+						<td class="digital">0 rpm</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Roue 3</th>
+						<td class="digital">0 rpm</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Roue 4</th>
+						<td class="digital">0 rpm</td>
+					</tr>
+				</table>
+			</div>
+			<div class=" col-md-6">
+				<table class="table table-striped">
+					<tr>
+						<th style="vertical-align:middle;">Temperature moteur</th>
+						<td class="digital">0 degres</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Temperature drive</th>
+						<td class="digital">0 degres</td>
+					</tr>
+					<tr>
+						<th style="vertical-align:middle;">Vitesse du moteur</th>
+						<td class="digital">0 rpm</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<script>
+			var BMSCharts = [];
+			var BMSTables = [];
+			var BrakeChart;
+			var AccelChart;
+			$(document).ready(new function(){
+				var ctx = $("#BMS1Volt").get(0).getContext("2d");
+				BMSTables.push($("#BMSTable1").get(0));
+				BMSTables.push($("#BMSTable2").get(0));
+				BMSTables.push($("#BMSTable3").get(0));
+				BMSTables.push($("#BMSTable4").get(0));
+				var myNewChart = new Chart(ctx);
+				var initDataVolt = {
+					labels: ["Cell1", "Cell2", "Cell3", "Cell4", "Cell5", "Cell6", "Cell7", "Cell8", "Cell9", "Cell10", "Cell11", "Cell12"],
+					datasets: [
+						{
+							label: "Cells Voltage",
+							fillColor: "rgba(220,220,220,0.5)",
+							strokeColor: "rgba(220,220,220,0.8)",
+							highlightFill: "rgba(220,220,220,0.75)",
+							highlightStroke: "rgba(220,220,220,1)",
+							data: [4.2, 4.2, 4.2, 4.2, 4.2, 4.2, 4.2, 4.2, 4.2, 4.2, 4.2, 4.2]
+						}
+					]
+				};
+
+				BMSCharts.push(new Chart(ctx).Bar(initDataVolt));
+
+				ctx = $("#BMS2Volt").get(0).getContext("2d");
+				var myNewChart2 = new Chart(ctx);
+				BMSCharts.push(new Chart(ctx).Bar(initDataVolt));
+
+				ctx = $("#BMS3Volt").get(0).getContext("2d");
+				var myNewChart3 = new Chart(ctx);
+				BMSCharts.push(new Chart(ctx).Bar(initDataVolt));
+
+				ctx = $("#BMS4Volt").get(0).getContext("2d");
+				var myNewChart4 = new Chart(ctx);
+				BMSCharts.push(new Chart(ctx).Bar(initDataVolt));
+
+				var donutData = [
+					{
+						value: 75,
+						color: "#006600	",
+						highlight: "#009900",
+						label: "% Utilisé"
+					},
+					{
+						value: 25,
+						color: "#484848",
+						highlight: "#686868",
+						label: "% Non-utilisé"
+					}
+				]
+
+				ctx = $("#brake").get(0).getContext("2d");
+				BrakeChart = new Chart(ctx).Doughnut(donutData);
+
+				ctx = $("#accel").get(0).getContext("2d");
+				AccelChart = new Chart(ctx).Doughnut(donutData);
+			});
+
+			var isConnected = false;
+			function OutputLog(msg) {
+				@if (Model)
+			{
+				<text>
+				var content = '<p>' + msg + '</p>';
+				$('#consolebox').append(content);
+				</text>
+			}
+			};
+
+			function connect() {
+				var host = $('#hostform').val();
+				if (isConnected) {
+					OutputLog('Already connected');
+					return;
+				}
+
+				try {
+					socket = new WebSocket(host);
+					OutputLog('Socket Status: ' + socket.readyState);
+					socket.onopen = function () {
+						OutputLog('Socket Status: ' + socket.readyState + ' (open)');
+						socket.send('0' + 'Carapas');
+						isConnected = true;
+					}
+
+					socket.onmessage = function (msg) {
+						var str = "";
+						str = msg.data;
+						var id = str.substr(0, 1);
+						var separator = str.indexOf("|");
+						var arg1 = "";
+						var arg2 = "";
+						if (separator != -1) {
+							arg1 = str.substr(1, separator - 1);
+							arg2 = str.substr(separator + 1);
+						}
+						else
+							arg1 = str.substr(1);
+
+						if (id == "0") {
+							OutputLog('Server reply : ' + arg1);
+						}
+						if (id == "1") {
+							OutputLog('Server echo msg : ' + arg1);
+						}
+						if (id == "2") {
+							OutputLog(arg1 + ' said : ' + arg2);
+						}
+						if (id == "3") {
+							OutputLog(arg1 + ' broadcasted : ' + arg2);
+						}
+						if (id == "4") {
+							OutputLog('Server streamed : ' + arg1);
+						}
+
+					}
+
+					socket.onclose = function () {
+						OutputLog('Socket Status: ' + socket.readyState + ' (Closed)');
+					}
+
+				} catch (exception) {
+					OutputLog('Error' + exception);
+				}
+			}
+		</script>
+        <hr />
+        <footer>
+            <p>SAE Sherbrooke</p>
+        </footer>
+    </div>
+
+    <script src="/Scripts/bootstrap.js"></script>
+	<script src="/Scripts/respond.js"></script>
+</body>
+</html>
