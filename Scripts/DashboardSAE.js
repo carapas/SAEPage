@@ -79,14 +79,30 @@ $(document).ready(new function(){
 
     ctx = $("#accel").get(0).getContext("2d");
     InputCharts.push(new Chart(ctx).Doughnut(donutData));
+
+    setInterval(function(){
+        console.log("get subs");
+        if (isConnected) {
+            socket.send('5');
+        }
+    }, 5000);
 });
 
 var isConnected = false;
 function OutputLog(msg) {
     {
-        var content = '<p>' + msg + '</p>';
-        $('#consolebox').append(content);
+        console.log(msg);
     }
+}
+
+var currentProducer = "";
+function NewSubscriber(sub) {
+    if (currentProducer) {
+        socket.send("3unsubscribe|" + currentProducer);
+    }
+
+    currentProducer = sub;
+    socket.send('3subscribe|' + currentProducer);
 }
 
 function HandleReceive(csv) {
@@ -230,6 +246,7 @@ function connect() {
                     break;
                 case 5:
                     OutputLog('Producers : '+arg1);
+                    HandleProducers(arg1);
                     break;
                 default:
                     OutputLog('Unhandled frame :'+str);
@@ -244,4 +261,22 @@ function connect() {
     } catch (exception) {
         OutputLog('Error' + exception);
     }
+}
+
+function HandleProducers(producers) {
+    if (!producers) return;
+
+    var listProducers = producers.split(',');
+
+    if(!currentProducer) NewSubscriber(listProducers[0]);
+
+    var select = $("#producers").get(0);
+    select.options = [];
+    select.innerHTML = "";
+    listProducers.forEach(function(prod){
+        var newOp = document.createElement("option");
+        newOp.text = prod;
+        newOp.value = prod;
+        select.options[select.options.length] = newOp;
+    });
 }
