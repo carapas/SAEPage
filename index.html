@@ -35,8 +35,9 @@
         }
 
         .content {
-            float: right;
-            width: 90%;
+			position: relative;
+			padding-left: 5%;
+			width: 100%;
             height: 100%;
             min-height:100%;
         }
@@ -84,7 +85,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<canvas id="BMS1Volt" width="400" height="400"></canvas>
+				<canvas id="BMS1Volt" width="450" height="400"></canvas>
 			</div>
 			<div class="col-md-6">
 				<table class="table table-striped" id="BMSTable1">
@@ -123,7 +124,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<canvas id="BMS2Volt" width="400" height="400"></canvas>
+				<canvas id="BMS2Volt" width="450" height="400"></canvas>
 			</div>
 			<div class="col-md-6">
 				<table class="table table-striped" id="BMSTable2">
@@ -162,7 +163,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<canvas id="BMS3Volt" width="400" height="400"></canvas>
+				<canvas id="BMS3Volt" width="450" height="400"></canvas>
 			</div>
 			<div class="col-md-6">
 				<table class="table table-striped" id="BMSTable3">
@@ -201,7 +202,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<canvas id="BMS4Volt" width="400" height="400"></canvas>
+				<canvas id="BMS4Volt" width="450" height="400"></canvas>
 			</div>
 			<div class="col-md-6">
 				<table class="table table-striped" id="BMSTable4">
@@ -264,7 +265,7 @@
 
 		<div class="row">
 			<div class=" col-md-6">
-				<table class="table table-striped">
+				<table class="table table-striped" id="table-roues">
 					<tr>
 						<th style="vertical-align:middle;">Roue 1</th>
 						<td class="digital">0 rpm</td>
@@ -284,7 +285,7 @@
 				</table>
 			</div>
 			<div class=" col-md-6">
-				<table class="table table-striped">
+				<table class="table table-striped" id="table-drive">
 					<tr>
 						<th style="vertical-align:middle;">Temperature moteur</th>
 						<td class="digital">0 degres</td>
