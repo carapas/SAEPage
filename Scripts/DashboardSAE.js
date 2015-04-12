@@ -105,12 +105,19 @@ function NewSubscriber(sub) {
     socket.send('3subscribe|' + currentProducer);
 }
 
-function HandleReceive(csv) {
-    var intArray = csv.split(',');
+function HandleReceive(str) {
+	var buf = new ArrayBuffer(str.length);
+	var bufView8 = new Uint8Array(buf);
+	for (var i=0, strLen=str.length; i<strLen; i++) {
+			bufView8[i] = str.charCodeAt(i);
+	}
+	var bufView32 = new Uint32Array(buf);
 
+	console.log(JSON.stringify(bufView32));
+	
     var idx = 0;
-    while (idx < intArray.length) {
-        idx = HandleData(idx, intArray);
+    while (idx < bufView32.length) {
+        idx = HandleData(idx, bufView32);
     }
 }
 
@@ -118,10 +125,11 @@ var Lengths = [17, 17, 17, 17, 4, 3, 3];
 
 function HandleData(idx, arr) {
     // Handle BMS data
-    var id = parseInt(arr[idx]);
+	
+    var id = arr[idx];
     var data = [];
     for(var i = 1; i < Lengths[id] + 1; i++) {
-        data.push(parseInt(arr[i + idx]));
+        data.push(arr[i + idx]);
     }
 
     if (id < 4) {
