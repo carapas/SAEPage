@@ -122,7 +122,7 @@ function HandleData(idx, arr) {
     var id = parseInt(arr[idx]);
     var data = [];
     for(var i = 1; i < Lengths[id] + 1; i++) {
-        if (arr[i + idx].indexOf("." > -1)) {
+        if (arr[i + idx].indexOf(".") > -1) {
             data.push(parseFloat(arr[i + idx]));
         } else {
             data.push(parseInt(arr[i + idx]));
