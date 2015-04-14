@@ -19,6 +19,7 @@ var BMSTables = [];
 var InputCharts = [];
 
 $(document).ready(new function(){
+    $("[name='my-checkbox']").bootstrapSwitch();
     var ctx = $("#BMS1Volt").get(0).getContext("2d");
     BMSTables.push($("#BMSTable1").get(0));
     BMSTables.push($("#BMSTable2").get(0));
@@ -105,31 +106,24 @@ function NewSubscriber(sub) {
     socket.send('3subscribe|' + currentProducer);
 }
 
-function HandleReceive(str) {
-	var buf = new ArrayBuffer(str.length);
-	var bufView8 = new Uint8Array(buf);
-	for (var i=0, strLen=str.length; i<strLen; i++) {
-			bufView8[i] = str.charCodeAt(i);
-	}
-	var bufView32 = new Uint32Array(buf);
+function HandleReceive(csv) {
+    var intArray = csv.split(',');
 
-	console.log(JSON.stringify(bufView32));
-	
     var idx = 0;
-    while (idx < bufView32.length) {
-        idx = HandleData(idx, bufView32);
+    while (idx < intArray.length) {
+        idx = HandleData(idx, intArray);
     }
 }
 
-var Lengths = [17, 17, 17, 17, 4, 3, 3];
+var Lengths = {0:17, 1:17, 2:17, 3:17, 4:4, 5:3, 6:3, 100:1};
 
 function HandleData(idx, arr) {
     // Handle BMS data
-	
-    var id = arr[idx];
+
+    var id = parseInt(arr[idx]);
     var data = [];
     for(var i = 1; i < Lengths[id] + 1; i++) {
-        data.push(arr[i + idx]);
+        data.push(parseInt(arr[i + idx]));
     }
 
     if (id < 4) {
@@ -141,6 +135,16 @@ function HandleData(idx, arr) {
         PopulateInputs(data);
     } else if (id == 6) { // drive
         PopulateDrive(data);
+    } else if (id == 100) {
+        var status = $("#carstatus").get(0);
+        if (data[0] == 0) {
+            status.innerHTML = "Off";
+            status.style.color = "red";
+        }
+        else {
+            status.innerHTML = "On";
+            status.style.color = "green";
+        }
     }
 
     return Lengths[id] + 1 + idx;
@@ -215,7 +219,7 @@ function connect() {
         OutputLog('Socket Status: ' + socket.readyState);
         socket.onopen = function () {
             OutputLog('Socket Status: ' + socket.readyState + ' (open)');
-            socket.send('0' + 'Carapas');
+            socket.send('0');
             isConnected = true;
         };
 

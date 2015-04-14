@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Formule SAE de Sherbrooke</title>
     <link href="Content/bootstrap.css" rel="stylesheet">
+	<link href="Content/bootstrap-switch.css" rel="stylesheet">
 	<link href="Content/site.css" rel="stylesheet">
 
     <script src="Scripts/modernizr-2.6.2.js"></script><style type="text/css"></style>
@@ -12,6 +13,7 @@
     <script src="Scripts/jquery-1.10.2.js"></script>
 
     <script src="Scripts/Chart.js"></script>
+	<script src="Scripts/bootstrap-switch.js"></script>
     <script src="Scripts/jQueryRotate.js"></script>
     <style>
         @font-face {
@@ -22,7 +24,7 @@
         .digital {font-family: "DigitalFont";font-size: 52px;}
 
         .table th {font-size: 24px;}
-        
+
         .bs-sidebar .nav > .active > ul {
             display: block;
         }
@@ -76,6 +78,9 @@
 			</div>
 			<div class="col-md-4">
 				<button class="btn btn-primary" onclick="connect()">Connect to Host</button>
+			</div>
+			<div class="col-md-4">
+				<h2>Status:</h2> <h4 id="carstatus" class="digital" style="color: red;">Off</h4>
 			</div>
 		</div>
 		<div class="row" id="bms1">
