@@ -19,7 +19,6 @@ var BMSTables = [];
 var InputCharts = [];
 
 $(document).ready(new function(){
-    $("[name='my-checkbox']").bootstrapSwitch();
     var ctx = $("#BMS1Volt").get(0).getContext("2d");
     BMSTables.push($("#BMSTable1").get(0));
     BMSTables.push($("#BMSTable2").get(0));
