@@ -122,7 +122,11 @@ function HandleData(idx, arr) {
     var id = parseInt(arr[idx]);
     var data = [];
     for(var i = 1; i < Lengths[id] + 1; i++) {
-        data.push(parseInt(arr[i + idx]));
+        if (arr[i + idx].indexOf("." > -1)) {
+            data.push(parseFloat(arr[i + idx]));
+        } else {
+            data.push(parseInt(arr[i + idx]));
+        }
     }
 
     if (id < 4) {
@@ -290,4 +294,6 @@ function HandleProducers(producers) {
         newOp.value = prod;
         select.options[select.options.length] = newOp;
     });
+
+    select.value = currentProducer;
 }
